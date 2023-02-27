@@ -1,0 +1,6 @@
+jsonschema
+pytest
+requests
+
+# pip install -r requirements.txt
+# pip install jsonschema pytest requests
