@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "id": {
+      "type": "Integer",
+      "minimum": 1
+    },
+    "text": {
+      "type": "String",
+      "pattern": "Playing [A-Za-z]+ is fun!"
+    }
+  },
+  "required": ["id", "text"]
+}
