@@ -1,0 +1,34 @@
+Task 1- Completed
+Scenario 1: With parameters like Chess,Carrom,Hockey
+	*In this case it should return id and in text the particular game should get added.
+	*verified status code to ensure whether the endpoint is working perfectly or not.(Status code should be 200)
+	*verified statusline,content-type additionally.
+	*used Junit assertion to assert id and text as mentioned in the assessment task.
+	
+Scenario 2: Without parameters 
+	*In this case it should return id and in text the deafult game=Sudoku should get added.
+	*verified status code to ensure whether the endpoint is working perfectly or not.(Status code should be 200)
+	*verified statusline,content-type additionally.
+	*used Junit assertion to assert id and text as mentioned in the assessment task.
+	
+
+Scenario 3: Validating the invalid endpoint
+	*In this case the status code should be 404.
+	*Verified the error text(should be not found).
+	*Verified the path using Junit assertion.
+	
+	
+Task 2- Completed
+
+Created a java class, stored values and parsed values from the data class . (POJO to JSON)
+
+Task 3- Completed
+
+Created a Json schema and validated the response of http://localhost:8080/game?name=
+
+Task 4- Raised PR
+
+
+
+	
+	
