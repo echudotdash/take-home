@@ -1,6 +1,7 @@
 package fun;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.hamcrest.MatcherAssert;
@@ -9,13 +10,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pojo.GameResponse;
 
-import java.io.InputStream;
+import java.io.File;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
-import static utils.Constants.BASE_PATH;
 import static utils.Constants.*;
 
 public class GameTests {
@@ -34,7 +34,7 @@ public class GameTests {
 
             final Response response = given()
                     .param("name", game)
-                    .get();
+                    .get(BASE_PATH);
 
             validateResponse(response, SC_OK);
             validateGameResponse(game, response);
@@ -45,7 +45,7 @@ public class GameTests {
     public void validateDefaultGameValue() {
 
         final Response response = given()
-                .get();
+                .get(BASE_PATH);
 
         validateResponse(response, SC_OK);
         validateGameResponse(DEFAULT_GAME, response);
@@ -53,16 +53,9 @@ public class GameTests {
 
     @Test
     public void validateSchema() {
-        InputStream jsonSchema = getClass().getClassLoader()
-                .getResourceAsStream("src/test/utils/gameResponseSchema.json");
-        given()
-                .param("nome", "")
-                .get()
-                .then()
-                .statusCode(SC_OK)
-                .and()
-                .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(jsonSchema));
+        RestAssured.given().accept(ContentType.JSON).when().get(BASE_PATH)
+                // verify JSON Schema
+                .then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(new File(SCHEMA_PATH)));
     }
 
     @Test
