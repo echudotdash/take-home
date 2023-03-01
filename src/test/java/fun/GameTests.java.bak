@@ -27,7 +27,7 @@ public class GameTests {
     CloseableHttpClient httpClient = HttpClients.createDefault();
 
     @Test
-    @DisplayName("To verify the status code for the valid data")
+    @DisplayName("To verify the status code of the valid data")
     public void test_valid_response() throws IOException {
         Game game = new Game(1, "TestGame");
         HttpUriRequest request = new HttpGet("http://localhost:8080/game?name=" + game.getText());
@@ -37,7 +37,7 @@ public class GameTests {
     }
 
     @Test
-    @DisplayName("To verify the status code for the invalid data")
+    @DisplayName("To verify the status code of the invalid data")
     public void test_invalid_response() throws IOException {
         Game game = new Game(2, "///sdsds?");
         HttpGet request = new HttpGet("http://localhost:8080/game?name=" + game.getText());
