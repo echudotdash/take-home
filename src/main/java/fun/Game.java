@@ -1,10 +1,11 @@
 package fun;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Builder;
 
-@Getter @Builder
+@Getter
+@Builder
 public class Game {
-    private Integer id;
+	private Integer id;
     private String text;
 }
