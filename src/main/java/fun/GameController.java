@@ -1,12 +1,14 @@
 package fun;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Slf4j
 @RestController
 public class GameController {
 
@@ -16,7 +18,15 @@ public class GameController {
 
     @RequestMapping("/game")
     public Game greeting(@RequestParam(value="name", defaultValue="Sudoku") String name) {
-        return Game.builder().id(fib(counter++)).text(String.format(template, name)).build();
+        log.info("********** NEW REQUEST **********");
+        int fibNum = fib(counter++);
+        log.info("ID: "+ fibNum +" Game: " + name );
+        Game gameResponse = Game.builder()
+                .id(fibNum)
+                .text(String.format(template, name))
+                .build();
+
+        return gameResponse;
     }
     
     private int fib(int counter) {
@@ -24,7 +34,9 @@ public class GameController {
     			return 1;
     		}
     		if(map.containsKey(counter)) {
-    			return map.get(counter);
+                int result = map.get(counter);
+                log.info("Memoization used for fib of "+counter+" = "+result);
+    			return result;
     		}
     		int value = fib(counter - 1) + fib(counter - 2);
     		map.put(counter, value);
