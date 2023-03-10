@@ -1,0 +1,32 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1677778841.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"id",
+		"text"
+	],
+	"properties": {
+		"id": {
+			"$id": "#root/id", 
+			"title": "Id", 
+			"type": "integer",
+			"examples": [
+				1
+			],
+			"default": 0
+		},
+		"text": {
+			"$id": "#root/text", 
+			"title": "Text", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"Playing Chess is fun!"
+			],
+			"pattern": "^.*$"
+		}
+	}
+}
