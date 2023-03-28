@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: singh
+Build-Jdk: 19.0.1
+Implementation-Title: simple-game-service
+Implementation-Version: 0.1.0
+Implementation-Vendor-Id: org.springframework
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/simple-game-se
+ rvice/
+Created-By: Maven Integration for Eclipse
+
