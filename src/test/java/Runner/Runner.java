@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/Features",
         glue = "Steps",
         dryRun = false,
-        tags = "@game",
+        //tags = "@valid",
         plugin = { "pretty", "html:target/report.html"}
 )
 public class Runner {

@@ -10,6 +10,7 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.containsString;
 
 public class GameTests {
@@ -24,7 +25,7 @@ public class GameTests {
         requestSpecification = given()
                 .queryParam("name","");
     }
-    @When("call to the default endpoint is made")
+    @When("call to the endpoint is made")
     public void call_to_the_endpoint_is_made() {
         response = requestSpecification.when().get("/game");
         Data.jsonResponseMap=response.jsonPath().getMap("");
@@ -43,5 +44,28 @@ public class GameTests {
     public void the_id_should_have_increased() {
        Assert.assertTrue(currentId > previousId);
        previousId = currentId;
+    }
+
+    //----------------------------------------------------------------
+
+    @Given("request is prepared for {string}")
+    public void request_is_prepared_for(String gameName) {
+        requestSpecification = given()
+                .queryParam("name", gameName);
+    }
+
+    //-------------------------------------------------------
+
+    @Then("status code {int} should be received")
+    public void status_code_should_be_received(Integer status_Code) {
+        response.then().assertThat().statusCode(status_Code);
+
+    }
+
+    //--------------------------------------------------
+    @Then("the json response must match the json schema")
+    public void the_json_response_must_match_the_json_schema() {
+        response.then().assertThat().body(matchesJsonSchemaInClasspath
+                ("schema.json"));
     }
 }
