@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "id": "integer",
+    "text": "string"
+  },
+  "required": ["id", "text"]
+}
