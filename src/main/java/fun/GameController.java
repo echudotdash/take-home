@@ -1,49 +1,56 @@
 package fun;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-
-import java.util.HashMap;
-import java.util.Map;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class GameControllerTest {
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class GameTests {
 
     @LocalServerPort
     private int port;
 
-    private String baseUrl;
-
     @BeforeEach
-    public void setUp() {
-        baseUrl = "http://localhost:" + port;
+    public void setup() {
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = port;
     }
 
     @Test
-    public void testGetGame() {
+    public void shouldReturnDefaultGame() {
         given()
-            .param("name", "Chess")
-        .when()
-            .get(baseUrl + "/game")
-        .then()
-            .statusCode(200)
-            .body("text", equalTo("Playing Chess is fun!"));
+            .when()
+                .get("/game")
+            .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("text", equalTo("Playing Sudoku is fun!"));
     }
 
     @Test
-    public void testGetGameWithDefaultName() {
+    public void shouldReturnCustomGame() {
         given()
-        .when()
-            .get(baseUrl + "/game")
-        .then()
-            .statusCode(200)
-            .body("text", equalTo("Playing Sudoku is fun!"));
+            .queryParam("name", "Chess")
+            .when()
+                .get("/game")
+            .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("text", equalTo("Playing Chess is fun!"));
     }
+
+    // Add more test cases as needed
+
 }
-
-!jsut run the test that was added to the file running mvn test maven command
