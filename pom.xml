@@ -14,6 +14,24 @@
     </parent>
 
     <dependencies>
+    	<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>4.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>json-schema-validator</artifactId>
+    <version>4.4.0</version>
+    <scope>test</scope>
+</dependency>
+		
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -33,13 +51,16 @@
             <artifactId>json-path</artifactId>
             <scope>test</scope>
         </dependency>
+		<dependency>
+    		<groupId>org.junit.jupiter</groupId>
+    		<artifactId>junit-jupiter-api</artifactId>
+		    <version>5.9.3</version>
+    		<scope>test</scope>
+		</dependency>
     </dependencies>
-
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
-
     <build>
         <plugins>
             <plugin>
@@ -48,5 +69,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
